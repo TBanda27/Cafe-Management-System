@@ -1,0 +1,9 @@
+securityDefinitions:
+  JWT:
+    type: apiKey
+    in: header
+    name: access_token
+
+
+security:
+  - JWT: []
