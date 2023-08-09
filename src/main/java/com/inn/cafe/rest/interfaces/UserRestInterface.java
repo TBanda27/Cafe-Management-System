@@ -16,6 +16,9 @@ public interface UserRestInterface {
     @PostMapping(path = "/login")
     public ResponseEntity<String> login(@RequestBody(required = true) Map<String, String> requestMap);
 
+    @PostMapping(path = "/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String authHeader);
+
     @GetMapping(path="/get")
     public ResponseEntity<List<UserWrapper>> getAllUsers();
 

@@ -10,8 +10,10 @@ import com.inn.cafe.service.interfaces.ProductService;
 import com.inn.cafe.utils.CafeUtils;
 import com.inn.cafe.wrapper.ProductWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.ReactivePageableHandlerMethodArgumentResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -134,6 +136,23 @@ public class ProductServiceImpl implements ProductService {
             exception.printStackTrace();
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<ProductWrapper> getProductById(Integer id) {
+        try{
+            if(jwtFilter.isAdmin()){
+                Optional<ProductWrapper> productWrapperOptional = Optional.ofNullable(productDAO.getProductById(id));
+                if(productWrapperOptional.isPresent()){
+                    return new ResponseEntity<>(productDAO.getProductById(id), HttpStatus.OK);
+                }
+                else return new ResponseEntity<>(new ProductWrapper(), HttpStatus.OK);
+            }
+            else return new ResponseEntity<>(new ProductWrapper(), HttpStatus.UNAUTHORIZED);
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        return new ResponseEntity<>(new ProductWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private boolean validateProductMap(Map<String, String> requestMap, boolean validateId) {

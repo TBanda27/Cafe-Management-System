@@ -10,12 +10,15 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 @Service
 public class JwtUtils {
 
-    private final String secret = "BTechDays";
+    private final String secret = "TheBanda.com27";
+    private Set<String> denyList = ConcurrentHashMap.newKeySet();
 
     public String extractUsername(String token){
         return extractClaims(token, Claims::getSubject);
@@ -59,6 +62,15 @@ public class JwtUtils {
     }
 
     public Boolean validateToken(String token, UserDetails userDetails){
-        return extractUsername(token).equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return !isTokenDenied(token) && extractUsername(token).equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
+
+    public void addToDenyList(String token) {
+        denyList.add(token);
+    }
+
+    public Boolean isTokenDenied(String token) {
+        return denyList.contains(token);
+    }
+
 }

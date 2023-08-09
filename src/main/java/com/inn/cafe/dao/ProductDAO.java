@@ -18,4 +18,6 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     Integer updateProductStatus(boolean status, int id);
 
     List<ProductWrapper> getProductsByCategory(Integer id);
+
+    ProductWrapper getProductById(Integer id);
 }

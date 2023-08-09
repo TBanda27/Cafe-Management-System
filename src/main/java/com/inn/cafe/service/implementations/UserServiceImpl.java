@@ -232,6 +232,18 @@ public class UserServiceImpl implements UserService {
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<String> logout(String authHeader) {
+        try{
+            String token = authHeader.replace("Bearer ", "");
+            jwtUtils.addToDenyList(token);
+            return CafeUtils.getResponseEntity(CafeConstants.USER_SUCCESSFULLY_LOGGED_OUT, HttpStatus.OK);
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     public boolean validateForgotPasswordAndUpdate(Map<String, String> requestMap){
 //        if the signup form doesn't have enough data return false
         return requestMap.containsKey("email")  && requestMap.containsKey("password") && requestMap.containsKey("confirmPassword");

@@ -18,6 +18,8 @@ public class CafeConstants {
 
     public static final String USER_SUCCESSFULLY_REGISTERED = "User successfully registered";
 
+    public static final String USER_SUCCESSFULLY_LOGGED_OUT = "User successfully logged out";
+
     public static final String CHECK_YOUR_EMAIL = "Check your email for credentials";
 
     public static final String USER_NOT_ACTIVATED = "User not yet activated";
@@ -44,5 +46,7 @@ public class CafeConstants {
     public static final String PRODUCT_SUCCESSFULLY_UPDATED = "Product successfully updated";
     public static final String PRODUCT_SUCCESSFULLY_DELETED = "Product successfully deleted";
     public static final String PRODUCT_DOES_NOT_EXIST = "Product does not exist";
+
+    public static final String FILE_STORAGE_LOCATION = "C:\\Users\\WORTECH ELECTRONICS\\Desktop\\Cafe Management System\\demo\\src\\main";
 
 }

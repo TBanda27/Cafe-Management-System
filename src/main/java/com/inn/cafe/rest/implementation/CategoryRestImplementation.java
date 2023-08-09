@@ -3,6 +3,7 @@ package com.inn.cafe.rest.implementation;
 
 import com.inn.cafe.constants.CafeConstants;
 import com.inn.cafe.pojo.Category;
+import com.inn.cafe.rest.interfaces.BillRestInterface;
 import com.inn.cafe.rest.interfaces.CategoryRest;
 import com.inn.cafe.service.interfaces.CategoryService;
 import com.inn.cafe.utils.CafeUtils;

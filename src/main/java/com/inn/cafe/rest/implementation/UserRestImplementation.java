@@ -41,6 +41,17 @@ public class UserRestImplementation implements UserRestInterface {
     }
 
     @Override
+    public ResponseEntity<String> logout(String authHeader) {
+        try{
+            return userService.logout(authHeader);
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
+    @Override
     public ResponseEntity<List<UserWrapper>> getAllUsers() {
 
         System.out.println("Get All Users()...");
